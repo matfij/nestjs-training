@@ -1,23 +1,25 @@
+import { Injectable } from "@nestjs/common";
 import { MessagesRepository } from "./messages.repository";
 import { MessageParams } from "./models/message-params.dto";
 
+@Injectable()
 export class MessagesService {
 
-    repository: MessagesRepository;
 
-    constructor() {
-        this.repository = new MessagesRepository();
-    }
+    constructor(
+        private repo: MessagesRepository
+    ) {}
 
     create(message: MessageParams) {
-        return this.repository.create(message);
+        return this.repo.create(message);
     }
 
-    get(id: string) {
-        return this.repository.getMessage(id);
+     get(id: string) {
+        return this.repo.getMessage(id);
     }
 
     getAll() {
-        return this.repository.getMessages();
+        return this.repo.getMessages();
     }
 }
+ 

@@ -5,11 +5,9 @@ import { MessageParams } from './models/message-params.dto';
 @Controller('messages')
 export class MessagesController {
 
-    service: MessagesService;
-
-    constructor() {
-        this.service = new MessagesService();
-    }
+    constructor(
+        private service: MessagesService
+    ) {}
 
     @Get('get')
     getMessages() {

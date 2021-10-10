@@ -1,7 +1,9 @@
+import { Injectable } from "@nestjs/common";
 import { readFile, writeFile } from "fs/promises";
 import { MessageParams } from "./models/message-params.dto";
 
 
+@Injectable()
 export class MessagesRepository {
 
     private readonly DATA_SOURCE = 'data.json';
