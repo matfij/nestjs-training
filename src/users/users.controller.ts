@@ -1,11 +1,12 @@
-import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseInterceptors } from '@nestjs/common';
-import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { UserDto } from './dtos/user.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
-@UseInterceptors(SerializeInterceptor)
+@Serialize(UserDto)
 export class UsersController {
 
     constructor(
@@ -36,6 +37,4 @@ export class UsersController {
     remove(@Param('id', ParseIntPipe) id: number) {
         return this.usersService.remove(id);
     }
-
-
 }
