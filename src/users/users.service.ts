@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersDto } from './dtos/get-users.dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -21,10 +22,9 @@ export class UsersService {
         return this.usersRepository.findOne(id);
     }
 
-    findAll() {
-        const filterParams: Partial<User> = {
-            removed: false
-        };
+    findAll(filterParams?: GetUsersDto) {
+        if (!filterParams.removed) filterParams.removed = false;
+
         return this.usersRepository.find(filterParams);
     }
 

@@ -31,6 +31,4 @@ export class User {
     logRemved() {
         console.log('temoved user -', this.id);
     }
-
-
 }
