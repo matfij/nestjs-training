@@ -88,4 +88,4 @@ describe('AuthService', () => {
 
         expect(user).toBeDefined();
     });
-})
+});
