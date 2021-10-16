@@ -3,6 +3,7 @@ import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersDto } from './dtos/get-users.dto';
+import { SigninDto } from './dtos/signin.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user.dto';
 import { UsersService } from './users.service';
@@ -19,6 +20,11 @@ export class UsersController {
     @Post('signup')
     signup(@Body() body: CreateUserDto) {
         return this.authService.signup(body);
+    }
+
+    @Post('signin')
+    signin(@Body() body: SigninDto) {
+        return this.authService.signin(body);
     }
 
     @Post('create')
