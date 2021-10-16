@@ -27,7 +27,7 @@ export class AuthService {
 
         const salt = randomBytes(this.PasswordConfig.saltLength).toString(this.PasswordConfig.encoding);
         const hash = (await crypt(params.password, salt, this.PasswordConfig.hashLength)) as Buffer;
-        const result = `${salt} ${this.PasswordConfig.split} ${hash.toString(this.PasswordConfig.encoding)}`;
+        const result = salt + this.PasswordConfig.split + hash.toString(this.PasswordConfig.encoding);
 
         return this.usersService.create({...params, password: result});
     }
