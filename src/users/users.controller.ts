@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Session, UseGuards } from '@nestjs/common';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
+import { AuthGuard } from 'src/guards/auth.guard';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dtos/create-user.dto';
@@ -17,14 +19,31 @@ export class UsersController {
         private usersService: UsersService
     ) {}
 
+    @Get('whoami')
+    @UseGuards(AuthGuard)
+    whoami(@CurrentUser() user: string) {
+        return user;
+    }
+
     @Post('signup')
-    signup(@Body() body: CreateUserDto) {
-        return this.authService.signup(body);
+    async signup(@Body() body: CreateUserDto, @Session() session: any) {
+        const user = await this.authService.signup(body);
+        session.id = user.id;
+
+        return user;
     }
 
     @Post('signin')
-    signin(@Body() body: SigninDto) {
-        return this.authService.signin(body);
+    async signin(@Body() body: SigninDto, @Session() session: any) {
+        const user = await this.authService.signin(body);
+        session.id = user.id;
+
+        return user;
+    }
+
+    @Post('signout')
+    signout(@Session() session: any) {
+        session.id = null;
     }
 
     @Post('create')
@@ -50,5 +69,15 @@ export class UsersController {
     @Delete('delete/:id')
     remove(@Param('id', ParseIntPipe) id: number) {
         return this.usersService.remove(id);
+    }
+
+    @Post('demo/:c')
+    setC(@Param('c') c: string, @Session() session: any) {
+        session.c = c;
+    }
+
+    @Get('demo')
+    getC(@Session() session: any) {
+        return session;
     }
 }
