@@ -1,7 +1,7 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { RequestExtension } from 'src/interfaces/request-extension.interface';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from 'src/apis/users/users.service';
+import { RequestExtension } from 'src/definitions/interfaces/request-extension.interface';
 
 @Injectable()
 export class CurrentUserInterceptor implements NestInterceptor {

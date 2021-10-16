@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { ReportsModule } from './reports/reports.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './users/user.entity';
-import { Report } from './reports/report.entity';
+import { Report } from './apis/reports/report.entity';
+import { ReportsModule } from './apis/reports/reports.module';
+import { User } from './apis/users/user.entity';
+import { UsersModule } from './apis/users/users.module';
 
 @Module({
   imports: [
@@ -21,7 +19,6 @@ import { Report } from './reports/report.entity';
       synchronize: true
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

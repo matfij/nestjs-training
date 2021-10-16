@@ -1,6 +1,5 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import exp from 'constants';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersDto } from './dtos/get-users.dto';
@@ -10,12 +9,12 @@ import { UsersService } from './users.service';
 describe('AuthService', () => {
 
     let service: AuthService;
-    let _usersService: Partial<UsersService>;
+    let usersService: Partial<UsersService>;
 
     beforeEach(async () => {
         const users: User[] = [];
 
-        _usersService = {
+        usersService = {
             findAll: (params?: GetUsersDto) => {
                 const filteredUsers= users.filter(x => x.email === params.email);
                 return Promise.resolve(filteredUsers);
@@ -30,7 +29,7 @@ describe('AuthService', () => {
         const module = await Test.createTestingModule({
             providers: [
                 AuthService,
-                { provide: UsersService, useValue: _usersService }
+                { provide: UsersService, useValue: usersService }
             ],
         }).compile();
         
