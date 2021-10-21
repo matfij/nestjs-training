@@ -54,7 +54,7 @@ describe('UsersController', () => {
     const user = await controller.findOne(1);
 
     try {
-      await expect(user.id).toEqual(1);
+      expect(user.id).toEqual(1);
       fail();
     } catch (err) {
       expect(err).toBeInstanceOf(TypeError);
@@ -62,10 +62,10 @@ describe('UsersController', () => {
   });
 
   it('sigin success, session setup', async () => {
-    const session = {id: null};
+    const session = {userId: null};
     const user = await controller.signin({email: 'mail.com', password: '123'}, session);
 
     expect(user.id).toEqual(1);
-    expect(session.id).toEqual(1);
+    expect(session.userId).toEqual(1);
   });
 });

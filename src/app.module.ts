@@ -40,6 +40,9 @@ export class AppModule {
   ) {}
 
   configure(consumer: MiddlewareConsumer) {
+    /**
+     * Nest execution: middlewares -> guards -> interceptors -> handler -> interceptors -> response
+     */
     const sessionKey = this.configService.get<string>('SESSION_KEY');
     consumer.apply(cookieSession({keys: [sessionKey]})).forRoutes('*');
   }

@@ -28,7 +28,7 @@ export class UsersController {
     @Post('signup')
     async signup(@Body() body: CreateUserDto, @Session() session: any) {
         const user = await this.authService.signup(body);
-        session.id = user.id;
+        session.userId = user.id;
 
         return user;
     }
@@ -36,7 +36,7 @@ export class UsersController {
     @Post('signin')
     async signin(@Body() body: SigninDto, @Session() session: any) {
         const user = await this.authService.signin(body);
-        session.id = user.id;
+        session.userId = user.id;
 
         return user;
     }
@@ -69,15 +69,5 @@ export class UsersController {
     @Delete('delete/:id')
     remove(@Param('id', ParseIntPipe) id: number) {
         return this.usersService.remove(id);
-    }
-
-    @Post('demo/:c')
-    setC(@Param('c') c: string, @Session() session: any) {
-        session.c = c;
-    }
-
-    @Get('demo')
-    getC(@Session() session: any) {
-        return session;
     }
 }

@@ -1,4 +1,5 @@
 import { Exclude } from "class-transformer";
+import { UserRole } from "src/definitions/enums/user-role";
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Report } from "../reports/report.entity";
 
@@ -18,6 +19,9 @@ export class User {
     @Column({default: false})
     @Exclude()
     removed: boolean;
+
+    @Column({default: UserRole.User})
+    role: UserRole;
 
     @OneToMany(_ => Report, x => x.user)
     reports: Report[];
