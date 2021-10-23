@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/utils/decorators/current-user.decorator';
-import { AuthGuard } from 'src/utils/guards/auth.guard';
-import { ModeratorGuard } from 'src/utils/guards/moderator.guard';
-import { Serialize } from 'src/utils/interceptors/serialize.interceptor';
+import { CurrentUser } from '../../utils/decorators/current-user.decorator';
+import { AuthGuard } from '../../utils/guards/auth.guard';
+import { ModeratorGuard } from '../../utils/guards/moderator.guard';
+import { Serialize } from '../../utils/interceptors/serialize.interceptor';
 import { User } from '../users/user.entity';
 import { ApproveReportDto } from './dtos/approve-report.dto';
 import { CreateReportDto } from './dtos/create-report.dto';

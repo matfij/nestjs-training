@@ -36,6 +36,15 @@ switch(process.env.NODE_ENV) {
         });
         break;
     }
+    case 'gen': {
+        Object.assign(ormConfig, {
+            type: 'sqlite',
+            database: 'db.gen.sqlite',
+            entities: ['**/*.entity.ts'],
+            migrationsRun: true,
+        });
+        break;
+    }
     default: 
         throw new Error('Environment not set');
 }

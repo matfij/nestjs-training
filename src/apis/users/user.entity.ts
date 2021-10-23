@@ -1,5 +1,5 @@
 import { Exclude } from "class-transformer";
-import { UserRole } from "src/definitions/enums/user-role";
+import { UserRole } from "../../definitions/enums/user-role";
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Report } from "../reports/report.entity";
 

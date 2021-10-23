@@ -2,9 +2,7 @@ import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Report } from './apis/reports/report.entity';
 import { ReportsModule } from './apis/reports/reports.module';
-import { User } from './apis/users/user.entity';
 import { UsersModule } from './apis/users/users.module';
 
 const cookieSession = require('cookie-session');

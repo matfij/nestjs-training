@@ -41,3 +41,6 @@ db.test.sqlite
 .env.dev
 .env.test
 .env.prod
+.env.gen
+
+clients/client

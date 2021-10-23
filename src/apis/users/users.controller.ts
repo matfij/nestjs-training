@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Session, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/utils/decorators/current-user.decorator';
-import { AuthGuard } from 'src/utils/guards/auth.guard';
-import { Serialize } from 'src/utils/interceptors/serialize.interceptor';
+import { CurrentUser } from '../../utils/decorators/current-user.decorator';
+import { AuthGuard } from '../../utils/guards/auth.guard';
+import { Serialize } from '../../utils/interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersDto } from './dtos/get-users.dto';

@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { UserRole } from "src/definitions/enums/user-role";
-import { RequestExtension } from "src/definitions/interfaces/request-extension.interface";
+import { UserRole } from "../../definitions/enums/user-role";
+import { RequestExtension } from "../../definitions/interfaces/request-extension.interface";
 
 export class ModeratorGuard implements CanActivate {
 

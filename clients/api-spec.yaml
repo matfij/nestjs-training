@@ -1,0 +1,184 @@
+openapi: 3.0.0
+paths:
+  /users/whoami:
+    get:
+      operationId: whoami
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  /users/signup:
+    post:
+      operationId: signup
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+      responses:
+        "201":
+          description: ""
+  /users/signin:
+    post:
+      operationId: signin
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SigninDto"
+      responses:
+        "201":
+          description: ""
+  /users/signout:
+    post:
+      operationId: signout
+      parameters: []
+      responses:
+        "201":
+          description: ""
+  /users/create:
+    post:
+      operationId: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+      responses:
+        "201":
+          description: ""
+  "/users/get/{id}":
+    get:
+      operationId: findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+  /users/get:
+    get:
+      operationId: findAll
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetUsersDto"
+      responses:
+        "200":
+          description: ""
+  "/users/update/{id}":
+    patch:
+      operationId: update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserDto"
+      responses:
+        "200":
+          description: ""
+  "/users/delete/{id}":
+    delete:
+      operationId: remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+  /reports/create:
+    post:
+      operationId: createReport
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReportDto"
+      responses:
+        "201":
+          description: ""
+  "/reports/approve/{id}":
+    patch:
+      operationId: approveReport
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApproveReportDto"
+      responses:
+        "200":
+          description: ""
+  /reports/estimate:
+    get:
+      operationId: getEstimate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetEstimateDto"
+      responses:
+        "200":
+          description: ""
+info:
+  title: Car advisor
+  description: ""
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    CreateUserDto:
+      type: object
+      properties: {}
+    SigninDto:
+      type: object
+      properties: {}
+    GetUsersDto:
+      type: object
+      properties: {}
+    UpdateUserDto:
+      type: object
+      properties: {}
+    CreateReportDto:
+      type: object
+      properties: {}
+    ApproveReportDto:
+      type: object
+      properties: {}
+    GetEstimateDto:
+      type: object
+      properties: {}

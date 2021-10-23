@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { NextFunction, Response } from "express";
-import { UsersService } from "src/apis/users/users.service";
-import { RequestExtension } from "src/definitions/interfaces/request-extension.interface";
+import { UsersService } from "../../apis/users/users.service";
+import { RequestExtension } from "../../definitions/interfaces/request-extension.interface";
 
 @Injectable()
 export class CurrentUserMiddleware implements NestMiddleware {
