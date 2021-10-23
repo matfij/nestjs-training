@@ -20,14 +20,19 @@ switch(process.env.NODE_ENV) {
             type: 'sqlite',
             database: 'db.test.sqlite',
             entities: ['**/*.entity.ts'],
+            migrationsRun: true,
         });
         break;
     }
     case 'prod': {
         Object.assign(ormConfig, {
-            type: 'sqlite',
-            database: 'sb.sqlite',
+            type: 'postgres',
+            url: process.env.DATABASE_URL,
             entities:[ '**/*.entity.js'],
+            migrationsRun: true,
+            ssl: {
+                rejectUnauthorized: false,
+            },
         });
         break;
     }
