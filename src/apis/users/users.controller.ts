@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Session, UseGuards } from '@nestjs/common';
+import { ApiCookieAuth, ApiCreatedResponse, ApiHeader, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from '../../utils/decorators/current-user.decorator';
 import { AuthGuard } from '../../utils/guards/auth.guard';
 import { Serialize } from '../../utils/interceptors/serialize.interceptor';
@@ -12,6 +13,9 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 @Serialize(UserDto)
+@ApiTags('users')
+@ApiHeader({name: 'X-Key', description: 'Auth key'})
+@ApiCookieAuth()
 export class UsersController {
 
     constructor(
@@ -21,12 +25,14 @@ export class UsersController {
 
     @Get('whoami')
     @UseGuards(AuthGuard)
-    whoami(@CurrentUser() user: string) {
+    @ApiOkResponse({type: String})
+    async whoami(@CurrentUser() user: string): Promise<string> {
         return user;
     }
 
     @Post('signup')
-    async signup(@Body() body: CreateUserDto, @Session() session: any) {
+    @ApiCreatedResponse({type: UserDto})
+    async signup(@Body() body: CreateUserDto, @Session() session: any): Promise<UserDto> {
         const user = await this.authService.signup(body);
         session.userId = user.id;
 
@@ -34,7 +40,8 @@ export class UsersController {
     }
 
     @Post('signin')
-    async signin(@Body() body: SigninDto, @Session() session: any) {
+    @ApiOkResponse({type: UserDto})
+    async signin(@Body() body: SigninDto, @Session() session: any): Promise<UserDto> {
         const user = await this.authService.signin(body);
         session.userId = user.id;
 
@@ -42,32 +49,37 @@ export class UsersController {
     }
 
     @Post('signout')
-    signout(@Session() session: any) {
+    async signout(@Session() session: any) {
         session.id = null;
     }
 
     @Post('create')
-    create(@Body() body: CreateUserDto) {
+    @ApiOkResponse({type: UserDto})
+    async create(@Body() body: CreateUserDto): Promise<UserDto> {
         return this.usersService.create(body);
     }
-
+    
     @Get('get/:id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    @ApiOkResponse({type: UserDto})
+    async findOne(@Param('id', ParseIntPipe) id: number): Promise<UserDto> {
         return this.usersService.findOne(id);
     }
 
     @Get('get')
-    findAll(@Body() body: GetUsersDto) {
+    @ApiOkResponse({type: UserDto, isArray: true})
+    async findAll(@Body() body: GetUsersDto): Promise<UserDto[]> {
         return this.usersService.findAll(body);
     }
 
     @Patch('update/:id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateUserDto) {
+    @ApiOkResponse({type: UserDto})
+    async update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateUserDto): Promise<UserDto> {
         return this.usersService.update(id, body);
     }
 
     @Delete('delete/:id')
-    remove(@Param('id', ParseIntPipe) id: number) {
+    @ApiOkResponse({type: UserDto})
+    async remove(@Param('id', ParseIntPipe) id: number): Promise<UserDto> {
         return this.usersService.remove(id);
     }
 }
