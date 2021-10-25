@@ -14,7 +14,7 @@ async function generate() {
     return OpenApiNestFactory.configure(app, documentBuilder, {
         fileGeneratorOptions: {
             enabled: true,
-            outputFilePath: './clients/api-spec.yaml',
+            outputFilePath: './clients/api-spec.yaml'
         },
         clientGeneratorOptions: {
             enabled: true,
