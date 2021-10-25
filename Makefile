@@ -11,3 +11,4 @@ generate.client:
 	npm run client:gen
 	mv src/generate-client.ts clients/generate-client.ts
 	rm db.gen.sqlite
+	py clients/clean-client.py
