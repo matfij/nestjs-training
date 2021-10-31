@@ -38,9 +38,6 @@ lerna-debug.log*
 db.dev.sqlite
 db.test.sqlite
 
-.env.dev
-.env.test
-.env.prod
-.env.gen
+.env
 
 clients/client

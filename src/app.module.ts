@@ -11,10 +11,15 @@ const cookieSession = require('cookie-session');
   imports: [
     UsersModule, 
     ReportsModule,
-    TypeOrmModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV}`
+      // envFilePath: '.env'
+    }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+      synchronize: true
     }),
   ],
   providers: [
@@ -29,7 +34,7 @@ export class AppModule {
 
   configure(consumer: MiddlewareConsumer) {
     /**
-     * Nest execution: middlewares -> guards -> interceptors -> handler -> interceptors -> response
+     * Nest execution: middlewares -> guards -> interceptors -> controller -> interceptors -> response
      */
     const sessionKey = this.configService.get<string>('SESSION_KEY');
     consumer.apply(cookieSession({keys: [sessionKey]})).forRoutes('*');
