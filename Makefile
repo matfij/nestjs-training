@@ -1,12 +1,15 @@
 .ONESHELL:
 
 migration.create:
+	npm run env:dbless
 	npm run typeorm migration:generate -- -n schema-v -o
 
 migration.apply:
+	npm run env:dbless
 	npm run typeorm migration:run
 
 migrate.dev:
+	npm run env:dbless
 	npm run typeorm migration:generate -- -n schema-v -o
 	npm run typeorm migration:run
 

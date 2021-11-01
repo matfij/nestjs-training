@@ -9,7 +9,7 @@ async function generate() {
   
     const documentBuilder = new DocumentBuilder()
         .setTitle('Car advisor')
-        .setVersion('1.0.0');
+        .setVersion('v1');
 
     return OpenApiNestFactory.configure(app, documentBuilder, {
         fileGeneratorOptions: {
