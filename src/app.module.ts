@@ -13,7 +13,7 @@ const cookieSession = require('cookie-session');
     ReportsModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      // envFilePath: '.env'
+      envFilePath: '.env'
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',

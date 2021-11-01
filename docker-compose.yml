@@ -4,8 +4,13 @@ services:
 
   api:
     build:
-      dockerfile: Dockerfile
       context: .
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - .:/matfij/src/app
+      - ./matfij/src/app/node_modules
+    command: npm run start:dev
     depends_on:
       - postgres
     env_file: 
@@ -15,7 +20,7 @@ services:
 
   postgres:
     image: postgres:14-alpine
-    ports:
-      - '${DB_PORT}:${DB_PORT}'
     env_file:
       - .env
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
