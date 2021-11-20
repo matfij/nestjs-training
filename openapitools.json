@@ -2,6 +2,20 @@
   "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
   "spaces": 2,
   "generator-cli": {
-    "version": "5.2.1"
+    "version": "5.2.1",
+    "generators": { 
+      "v2.0": {
+        "generatorName": "typescript-angular",
+        "output": "#{cwd}/output/#{name}",
+        "glob": "schema.yaml",
+        "additionalProperties": {
+          "npmName": "testCient",
+          "ngVersion": "12.1.0",
+          "supportsES6": "true",
+          "npmVersion": "6.9.0",
+          "withInterfaces": true
+        }
+      }
+    }
   }
 }

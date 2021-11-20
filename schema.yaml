@@ -1,0 +1,432 @@
+openapi: 3.0.0
+paths:
+  /users/whoami:
+    get:
+      operationId: whoami
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+      tags:
+        - users
+      security:
+        - cookie: []
+  /users/signup:
+    post:
+      operationId: signup
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+      tags:
+        - users
+      security:
+        - cookie: []
+  /users/signin:
+    post:
+      operationId: signin
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SigninDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+      tags:
+        - users
+      security:
+        - cookie: []
+  /users/signout:
+    post:
+      operationId: signout
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+      responses:
+        "201":
+          description: ""
+      tags:
+        - users
+      security:
+        - cookie: []
+  /users/create:
+    post:
+      operationId: create
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+      tags:
+        - users
+      security:
+        - cookie: []
+  "/users/get/{id}":
+    get:
+      operationId: findOne
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+      tags:
+        - users
+      security:
+        - cookie: []
+  /users/get:
+    get:
+      operationId: findAll
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetUsersDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDto"
+      tags:
+        - users
+      security:
+        - cookie: []
+  "/users/update/{id}":
+    patch:
+      operationId: update
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+      tags:
+        - users
+      security:
+        - cookie: []
+  "/users/delete/{id}":
+    delete:
+      operationId: remove
+      parameters:
+        - name: X-Key
+          in: header
+          description: Auth key
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDto"
+      tags:
+        - users
+      security:
+        - cookie: []
+  /reports/create:
+    post:
+      operationId: createReport
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReportDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportDto"
+      tags:
+        - reports
+      security:
+        - cookie: []
+  "/reports/approve/{id}":
+    patch:
+      operationId: approveReport
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApproveReportDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReportDto"
+      tags:
+        - reports
+      security:
+        - cookie: []
+  /reports/estimate:
+    get:
+      operationId: getEstimate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetEstimateDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimateDto"
+      tags:
+        - reports
+      security:
+        - cookie: []
+info:
+  title: Car advisor
+  description: ""
+  version: v1
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    CreateUserDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+            - User
+            - Moderator
+            - Admin
+      required:
+        - id
+        - email
+        - role
+    SigninDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    GetUsersDto:
+      type: object
+      properties:
+        email:
+          type: string
+        removed:
+          type: boolean
+    UpdateUserDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        removed:
+          type: boolean
+    CreateReportDto:
+      type: object
+      properties:
+        price:
+          type: number
+        brand:
+          type: string
+        model:
+          type: string
+        year:
+          type: number
+        mileage:
+          type: number
+      required:
+        - price
+        - brand
+        - model
+        - year
+        - mileage
+    ReportDto:
+      type: object
+      properties:
+        id:
+          type: number
+        approved:
+          type: boolean
+        brand:
+          type: string
+        model:
+          type: string
+        price:
+          type: number
+        year:
+          type: number
+        mileage:
+          type: number
+        userId:
+          type: number
+      required:
+        - id
+        - approved
+        - brand
+        - model
+        - price
+        - year
+        - mileage
+        - userId
+    ApproveReportDto:
+      type: object
+      properties:
+        approved:
+          type: boolean
+      required:
+        - approved
+    GetEstimateDto:
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        year:
+          type: number
+        mileage:
+          type: number
+      required:
+        - brand
+        - model
+        - year
+        - mileage
+    EstimateDto:
+      type: object
+      properties:
+        price:
+          type: number
+      required:
+        - price
